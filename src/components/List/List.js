@@ -3,6 +3,8 @@ import { Paper, Typography, CssBaseline } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Title from "./Title";
+import Card from "./Card";
+import InputContainer from "../input/InputContainer"
 
 const theme = createTheme({
     spacing: 8,
@@ -26,6 +28,10 @@ function List() {
           <CssBaseline/>
           <Typography>
           <Title/>
+          <Card/>
+          <Card/>
+          <Card/>
+          <InputContainer/>
           </Typography>
         </Paper>
       </div>

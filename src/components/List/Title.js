@@ -3,18 +3,21 @@ import React, { useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { styled } from "@mui/material/styles";
 
 
 const useStyle = makeStyles((theme) => ({
 
   editableTitleContainer: {
-    margin: theme.spacing(2),
+    margin: theme.spacing(1),
     display: "flex",
   },
   editableTitle: {
     flexGrow: 1,
     textAlign: "start",
-    margin: theme.spacing(2)
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+    
   },
   InputValue: {
     textAlign: "start",
@@ -27,6 +30,14 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
+
+const UnsetTypography = styled(Typography)({
+  "&.MuiTypography-root": {
+    fontSize:   "1.2rem",
+    fontWeight: "bold",
+  }
+});
+
 export default function Title() {
   const [open, setOpen] = useState(false);
   const classes = useStyle();
@@ -36,6 +47,7 @@ export default function Title() {
         {open ? (
           <div className={classes.InputValue}>
             <InputBase
+              autoFocus
               value="Todo"
               inputProps={{
                 className: classes.input,
@@ -46,12 +58,12 @@ export default function Title() {
           </div>
         ) : (
           <div className={classes.editableTitleContainer}>
-            <Typography
+            <UnsetTypography
               onClick={() => setOpen(!open)}
               className={classes.editableTitle}
             >
-              TODO
-            </Typography>
+              Todo
+            </UnsetTypography>
             <MoreHorizIcon />
           </div>
         )}
