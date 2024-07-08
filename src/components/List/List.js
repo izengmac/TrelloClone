@@ -18,7 +18,7 @@ const useStyle = makeStyles({
   },
 });
 
-function List() {
+function List({list}) {
   const classes = useStyle();
 
   return (
@@ -27,10 +27,10 @@ function List() {
         < Paper className = {classes.root}>
           <CssBaseline/>
           <Typography>
-          <Title/>
-          <Card/>
-          <Card/>
-          <Card/>
+          <Title title= {list.title}/>
+          {list.cards.map((card) => (
+            <Card key={card.id} card={card}/>
+          ))}
           <InputContainer/>
           </Typography>
         </Paper>

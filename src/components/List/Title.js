@@ -38,7 +38,7 @@ const UnsetTypography = styled(Typography)({
   }
 });
 
-export default function Title() {
+export default function Title({title}) {
   const [open, setOpen] = useState(false);
   const classes = useStyle();
 
@@ -48,7 +48,7 @@ export default function Title() {
           <div className={classes.InputValue}>
             <InputBase
               autoFocus
-              value="Todo"
+              value={title}
               inputProps={{
                 className: classes.input,
               }}
@@ -62,7 +62,7 @@ export default function Title() {
               onClick={() => setOpen(!open)}
               className={classes.editableTitle}
             >
-              Todo
+              {title}
             </UnsetTypography>
             <MoreHorizIcon />
           </div>
