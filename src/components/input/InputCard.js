@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Paper, InputBase, Button, IconButton } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { makeStyles } from "@mui/styles";
@@ -51,6 +51,12 @@ const ButtonWrapper = styled(Button)(({theme}) => ({
 
 
 export default function InputCard({setOpen}) {
+  const [cardTitle, setCardTitle] = useState("");
+
+
+  const handleOnChange = (e) => {
+    setCardTitle(e.target.value);
+  }
   const classes = useStyle();
   return (
     <div>
@@ -64,6 +70,7 @@ export default function InputCard({setOpen}) {
               classes: classes.input,
             }}
             placeholder="Enter a title for this card"
+            value={cardTitle}
           />
         </Paper>
       </div>
