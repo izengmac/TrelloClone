@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Collapse } from '@mui/material';
 
 const theme = createTheme({
+  spacing: 8,
   palette: {
     primary: {
       main: "#FF5733",
@@ -22,17 +23,21 @@ const theme = createTheme({
       contrastText: "#47008F",
     },
   },
+  
+
 });
 
-const useStyle = makeStyles((theme) => ({
+console.log("theme" , theme.spacing)
+const useStyle = makeStyles(({theme}) => ({
   root: {
-    marginTop: theme.spacing(2),
+      width: '300px',
+    
   },
 }));
 
 const PaperWrapper = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(1, 1, 1, 2),
-  margin: theme.spacing(0, 1, 1, 1),
+  padding:theme.spacing(1, 1, 1, 2),
+  margin:theme.spacing(0, 1, 1, 1),
   "&:hover": {
     backgroundColor: theme.palette.secondary.main,
     color: "#fff",
@@ -42,7 +47,8 @@ export default function InputContainer({listId}) {
   const [open, setOpen] = useState(false)
   const classes = useStyle();
   return (
-    <div className={classes.root}>
+    <ThemeProvider theme={theme}>
+        <div className={classes.root}>
       <Collapse in={open}>
       <InputCard setOpen={setOpen} listId={listId} />
       </Collapse>
@@ -52,5 +58,7 @@ export default function InputContainer({listId}) {
       </PaperWrapper>
     </Collapse>
     </div>
+    </ThemeProvider>
+  
   );
 }
