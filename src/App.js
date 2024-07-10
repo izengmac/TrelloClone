@@ -7,6 +7,7 @@ import store from "../src/utils/store";
 import StoreApi from "../src/utils/storeApi";
 import InputContainer from "./components/input/InputContainer";
 import { makeStyles } from "@mui/styles";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -75,15 +76,17 @@ function App() {
   }
   return (
     <StoreApi.Provider value={{ addMoreCard, addMoreList, updateListTitle }}>
-      <div className={classes.root}>
+    <DragDropContext>
+    <div className={classes.root}>
         {data.listIds.map((listId) => {
           const list = data.lists[listId];
           console.log(list);
           return <List list={list} key={listId} />;
-        })}
-
+        })}  
         <InputContainer type="list" />
       </div>
+    </DragDropContext>
+
     </StoreApi.Provider>
   );
 }
