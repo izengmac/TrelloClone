@@ -38,13 +38,13 @@ const PaperWrapper = styled(Paper)(({ theme }) => ({
     color: "#fff",
   },
 }));
-export default function InputContainer() {
+export default function InputContainer({listId}) {
   const [open, setOpen] = useState(false)
   const classes = useStyle();
   return (
     <div className={classes.root}>
       <Collapse in={open}>
-      <InputCard setOpen={setOpen} />
+      <InputCard setOpen={setOpen} listId={listId} />
       </Collapse>
     <Collapse in={!open}>
     <PaperWrapper elevation={0} onClick={() => setOpen(!open)}>

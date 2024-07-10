@@ -1,71 +1,81 @@
-import React, {useState} from "react";
+import React, { useContext, useState } from "react";
 import { Paper, InputBase, Button, IconButton } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/system";
 import { ThemeProvider, createTheme, alpha } from "@mui/material/styles";
+import storeApi from "../../utils/storeApi";
 
 const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#FF5733",
-        // light: will be calculated from palette.primary.main,
-        // dark: will be calculated fro // contrastText: will be calculated to contrast with palette.primary.main
-      },
-      secondary: {
-        main: "#E0C2FF",
-        light: "#F5EBFF",
-        // dark: will be calculated from palette.secondary.main,
-        contrastText: "#47008F",
-      },
+  palette: {
+    primary: {
+      main: "#FF5733",
+      // light: will be calculated from palette.primary.main,
+      // dark: will be calculated fro // contrastText: will be calculated to contrast with palette.primary.main
     },
-  });
+    secondary: {
+      main: "#E0C2FF",
+      light: "#F5EBFF",
+      // dark: will be calculated from palette.secondary.main,
+      contrastText: "#47008F",
+    },
+  },
+});
 
 const useStyle = makeStyles((theme) => ({
   card: {
     textAlign: "start",
     margin: theme.spacing(0, 1, 1, 1),
     paddingBottom: theme.spacing(4),
-    paddingLeft: theme.spacing(2)
+    paddingLeft: theme.spacing(2),
   },
-  confirm:{
+  confirm: {
     margin: theme.spacing(0, 1, 1, 1),
-    display:"flex",
+    display: "flex",
     alignItems: "start",
-    
   },
-  input:{
-    backgroundColor:"#fff"
-  }
+  input: {
+    backgroundColor: "#fff",
+  },
 }));
 
-const ButtonWrapper = styled(Button)(({theme}) => ({
-    color:"#fff",
-    background:"green",
-    "&:hover":{
-        background: "#000",
-        color:"#fff"
-    }
-   
-}))
+const ButtonWrapper = styled(Button)(({ theme }) => ({
+  color: "#fff",
+  background: "green",
+  "&:hover": {
+    background: "#000",
+    color: "#fff",
+  },
+}));
 
-
-export default function InputCard({setOpen}) {
+export default function InputCard({ setOpen, listId }) {
   const [cardTitle, setCardTitle] = useState("");
-
-
+  const classes = useStyle();
+  const { addMoreCard } = useContext(storeApi);
   const handleOnChange = (e) => {
     setCardTitle(e.target.value);
-  }
-  const classes = useStyle();
+  };
+
+  const handleBtnConfirmed = () => {
+    addMoreCard(cardTitle, listId);
+    setOpen(false);
+    setCardTitle(""); // reset input field after add card
+  };
+
+  const handleBlur = () => {
+    setOpen(false);
+    setCardTitle(""); // reset input field after cancel add card
+  };
+
   return (
     <div>
       <div>
         <Paper className={classes.card}>
           <InputBase
+            onChange={handleOnChange}
             multiline
             fullwidth
-            onBlur={() => setOpen(false)}
+            onBlur={handleBlur}
             inputProps={{
               classes: classes.input,
             }}
@@ -75,9 +85,9 @@ export default function InputCard({setOpen}) {
         </Paper>
       </div>
       <div className={classes.confirm}>
-        <ButtonWrapper onClick={() => setOpen(false)} > Add Cart</ButtonWrapper>
+        <ButtonWrapper onClick={handleBtnConfirmed}> Add Cart</ButtonWrapper>
         <IconButton>
-          <ClearIcon onClick={() => setOpen(false)}/>
+          <ClearIcon onClick={() => setOpen(false)} />
         </IconButton>
       </div>
     </div>
