@@ -8,10 +8,11 @@ import StoreApi from "../src/utils/storeApi";
 import InputContainer from "./components/input/InputContainer";
 import { makeStyles } from "@mui/styles";
 
-
 const useStyle = makeStyles((theme) => ({
   root: {
-      display: 'flex',  
+    display: "flex",
+    minHeight: "100vh",
+    background: "green",
   },
 }));
 
@@ -47,7 +48,7 @@ function App() {
           return <List list={list} key={listId} />;
         })}
 
-        <InputContainer />
+        <InputContainer type="list" />
       </div>
     </StoreApi.Provider>
   );

@@ -51,23 +51,23 @@ const ButtonWrapper = styled(Button)(({theme}) => ({
 }))
 
 
-export default function InputCard({setOpen, listId}) {
-  const [cardTitle, setCardTitle] = useState("");
+export default function InputCard({setOpen, listId, type}) {
+  const [title, setTitle] = useState("");
   const classes = useStyle();
   const {addMoreCard} = useContext(storeApi);
   const handleOnChange = (e) => {
-    setCardTitle(e.target.value);
+    setTitle(e.target.value);
   };
 
   const handleBtnConfirmed = () => {
-    addMoreCard(cardTitle,listId); 
+    addMoreCard(title,listId); 
     setOpen(false)
-    setCardTitle("")  // reset input field after add card
+    setTitle("")  // reset input field after add card
   }
 
  const handleBlur = () => {
     setOpen(false);
-    setCardTitle("")  // reset input field after cancel add card
+    // setTitle("")  // reset input field after cancel add card
   }
   
   return (
@@ -82,13 +82,15 @@ export default function InputCard({setOpen, listId}) {
             inputProps={{
               classes: classes.input,
             }}
-            placeholder="Enter a title for this card"
-            value={cardTitle}
+            placeholder={type === "card"?"Enter a title for this card...":"Enter list title"}
+            value={title}
           />
         </Paper>
       </div>
       <div className={classes.confirm}>
-        <ButtonWrapper onClick={handleBtnConfirmed} > Add Cart</ButtonWrapper>
+        <ButtonWrapper onClick={handleBtnConfirmed} > 
+        {type === "card"? "Add Cart": "Add List" }
+        </ButtonWrapper>
         <IconButton>
           <ClearIcon onClick={() => setOpen(false)}/>
         </IconButton>
