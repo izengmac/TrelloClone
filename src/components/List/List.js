@@ -12,7 +12,7 @@ const theme = createTheme({
 
 const useStyle = makeStyles({
   root: {
-    width: "300px",
+    minWidth: "300px",
     backgroundColor: "#EBECFO",
     marginLeft: theme.spacing(2),
   },
@@ -27,7 +27,7 @@ function List({list}) {
         < Paper className = {classes.root}>
           <CssBaseline/>
           <Typography>
-          <Title title= {list.title}/>
+          <Title title= {list.title} listId={list.id}/>
           {list.cards.map((card) => (
             <Card key={card.id} card={card} />
           ))}

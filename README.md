@@ -8,7 +8,7 @@ Part 2
 [❌] initialize data
 [❌] add card to list 
 [❌] add new list 
-[] update list title 
+[❌] update list title 
 
 Part 3
 [] drag drop in the sme list 
