@@ -13,6 +13,7 @@ const useStyle = makeStyles((theme) => ({
     display: "flex",
     minHeight: "100vh",
     background: "green",
+    overflow: "auto"
   },
 }));
 
