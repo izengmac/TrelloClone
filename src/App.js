@@ -19,6 +19,7 @@ const useStyle = makeStyles((theme) => ({
 function App() {
   const [data, setData] = useState(store);
   const classes = useStyle();
+
   const addMoreCard = (title, listId) => {
     const newCradId = uuid();
     const newCard = {
@@ -39,8 +40,26 @@ function App() {
     setData(newState);
   };
 
+  const addMoreList = (title) => {
+    const newListId = uuid();
+    const newList = {
+      id: newListId,
+      title,
+      cards: [],
+    };
+
+    const newState = {
+      listIds: [...data.listIds, newListId],
+      lists: {
+        ...data.lists,
+        [newListId]: newList,
+      },
+    };
+    setData(newState);
+  };
+
   return (
-    <StoreApi.Provider value={{ addMoreCard }}>
+    <StoreApi.Provider value={{ addMoreCard, addMoreList }}>
       <div className={classes.root}>
         {data.listIds.map((listId) => {
           const list = data.lists[listId];

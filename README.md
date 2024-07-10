@@ -7,7 +7,7 @@ Part 1
 Part 2 
 [❌] initialize data
 [❌] add card to list 
-[] add new list 
+[❌] add new list 
 [] update list title 
 
 Part 3

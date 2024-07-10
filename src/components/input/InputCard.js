@@ -54,15 +54,24 @@ const ButtonWrapper = styled(Button)(({theme}) => ({
 export default function InputCard({setOpen, listId, type}) {
   const [title, setTitle] = useState("");
   const classes = useStyle();
-  const {addMoreCard} = useContext(storeApi);
+
+  const {addMoreCard, addMoreList} = useContext(storeApi);
   const handleOnChange = (e) => {
     setTitle(e.target.value);
   };
 
   const handleBtnConfirmed = () => {
-    addMoreCard(title,listId); 
+    if(type ==="card"){
+      addMoreCard(title,listId); 
+      setOpen(false)
+      setTitle("")  
+    }
+    else{
+      addMoreList(title); 
     setOpen(false)
-    setTitle("")  // reset input field after add card
+    setTitle("")  //
+    }
+     // reset input field after add card
   }
 
  const handleBlur = () => {
