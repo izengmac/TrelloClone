@@ -74,9 +74,39 @@ function App() {
     };
     setData(newState)
   }
+
+  const onDragEnd = (result) => {
+    const {destination, source, draggableId} = result;
+    console.log("destinataion",destination,"source", source, draggableId)
+
+
+    if (!destination) {
+      return;
+    }
+    const sourceList = data.lists[source.droppableId];
+    const destinationList = data.lists[destination.droppableId];
+    const draggingCard = sourceList.cards.filter(
+      (card) => card.id === draggableId
+    )[0];
+
+    if(source.droppableId === destination.droppableId) {
+      sourceList.cards.splice(source.index, 1);
+      destinationList.cards.splice(destination.index, 0, draggingCard);
+     
+
+      const newState = {
+        ...data,
+        lists:{
+          ...data.lists,
+          [sourceList.id]:destinationList
+        }
+      }
+      setData(newState)
+  }
+}
   return (
     <StoreApi.Provider value={{ addMoreCard, addMoreList, updateListTitle }}>
-    <DragDropContext>
+    <DragDropContext onDragEnd={onDragEnd}>
     <div className={classes.root}>
         {data.listIds.map((listId) => {
           const list = data.lists[listId];

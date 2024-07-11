@@ -11,7 +11,7 @@ Part 2
 [❌] update list title 
 
 Part 3
-[] drag drop in the sme list 
+[❌] drag drop in the sme list 
 [] drag and drop in different list
 [] drag and drop list 
 
