@@ -12,7 +12,7 @@ Part 2
 
 Part 3
 [❌] drag drop in the sme list 
-[] drag and drop in different list
+[❌] drag and drop in different list
 [] drag and drop list 
 
 Part 4 
