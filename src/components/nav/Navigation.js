@@ -7,7 +7,7 @@ export default function Navigation() {
   return (
     <div>
       <TopBar setOpenSideMenu={setOpenSideMenu} />
-      <SideMenu openSideMenu={openSideMenu} setSideMenu={setOpenSideMenu} />
+      <SideMenu openSideMenu={openSideMenu} setOpenSideMenu={setOpenSideMenu} />
     </div>
   );
 }
