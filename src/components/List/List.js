@@ -5,7 +5,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Title from "./Title";
 import Card from "./Card";
 import InputContainer from "../input/InputContainer";
-import { Droppable } from "react-beautiful-dnd";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 
 const theme = createTheme({
   spacing: 8,
@@ -22,53 +22,59 @@ const useStyle = makeStyles({
   },
 });
 
-function List({ list }) {
+function List({ list, index }) {
   const classes = useStyle();
 
-  const [ enabled, setEnabled ] = React.useState(false);
+  const [enabled, setEnabled] = React.useState(false);
 
   React.useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
 
     return () => {
-       cancelAnimationFrame(animation);
-       setEnabled(false);
+      cancelAnimationFrame(animation);
+      setEnabled(false);
     };
   }, []);
 
   if (!enabled) {
-      return null;
+    return null;
   }
 
-
   return (
-    <ThemeProvider theme={theme}>
-      <div>
-        <Paper className={classes.root}>
-          <CssBaseline />
-          <Typography>
-            <Title title={list.title} listId={list.id} />
-            <Droppable droppableId={list.id}>
-              {(provided) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  className={classes.cardContainer}
-                >
-                  {list.cards.map((card, index) => (
-                    <Card key={card.id + "-button" } card={card} index={index} />
-                  ))}
-                  {provided.placeholder}
-                  
-                </div>
-              )}
-            </Droppable>
+    <Draggable draggableId={list.id} index={index}>
+      {(provided) => (
+        <ThemeProvider theme={theme}>
+          <div {...provided.draggableProps} ref={provided.innerRef}>
+            <Paper className={classes.root} {...provided.dragHandleProps}>
+              <CssBaseline />
+              <Typography>
+                <Title title={list.title} listId={list.id} />
+                <Droppable droppableId={list.id}>
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                      className={classes.cardContainer}
+                    >
+                      {list.cards.map((card, index) => (
+                        <Card
+                          key={card.id + "-button"}
+                          card={card}
+                          index={index}
+                        />
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
 
-            <InputContainer listId={list.id} type="card" />
-          </Typography>
-        </Paper>
-      </div>
-    </ThemeProvider>
+                <InputContainer listId={list.id} type="card" />
+              </Typography>
+            </Paper>
+          </div>
+        </ThemeProvider>
+      )}
+    </Draggable>
   );
 }
 
