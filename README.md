@@ -16,6 +16,6 @@ Part 3
 [❌] drag and drop list 
 
 Part 4 
-[] navigation bar
-[] side menu
+[❌] navigation bar
+[❌] side menu
 [] Box menu

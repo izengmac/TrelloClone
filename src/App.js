@@ -7,7 +7,7 @@ import Navigation from './components/nav/Navigation';
 
 const useStyle = makeStyles((theme) => ({
   root:{
-    backgroundColor:"green"
+    backgroundColor:"blue"
   }
 }));
 
